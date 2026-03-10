@@ -4,170 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전통분식 - 클래식한 맛의 가치</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        body { 
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+            background-color: #faf8f5; 
+            color: #2d3436; 
         }
+        html { scroll-behavior: smooth; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        .glass-panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05); }
+        .dark-glass { background: rgba(45, 52, 54, 0.95); border: 1px solid rgba(214, 48, 49, 0.8); color: white; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        body {
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fafafa;
-        }
+        /* 기존 분식 색상 유지 */
+        .brand-red { color: #d63031; }
+        .brand-orange { color: #fab1a0; }
+        .brand-bg { background-color: #faf8f5; }
+        .brand-card { background: linear-gradient(135deg, #f5e6d3 0%, #ffeaa7 100%); }
+        .brand-border { border-color: #f5e6d3; }
 
+        /* 기존 스타일 유지 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* 헤더 */
-        header {
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-style: italic;
-        }
-
-        /* 네비게이션 */
-        nav {
-            background-color: #6B4423;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        nav li {
-            margin: 0 1.5rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #FFD700;
-        }
-
-        /* 메인 섹션 */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f4e4c1" width="1200" height="600"/><path fill="%23e8d4a1" d="M0 300h1200v300H0z"/><circle fill="%23d4a574" cx="200" cy="150" r="80"/><circle fill="%23d4a574" cx="1000" cy="450" r="60"/><rect fill="%238b4513" x="500" y="200" width="200" height="200" rx="20"/></svg>');
-            background-size: cover;
-            background-position: center;
-            padding: 6rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
-
-        .btn-primary {
-            background-color: #FFD700;
-            color: #333;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: #FFC700;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-        }
-
-        /* 섹션 스타일 */
-        section {
-            padding: 4rem 0;
-        }
-
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+            font-weight: 700;
             margin-bottom: 3rem;
-            color: #8B4513;
+            color: #2d3436;
             position: relative;
+            letter-spacing: -0.5px;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 60px;
             height: 3px;
-            background-color: #FFD700;
+            background: #d63031;
             margin: 1rem auto;
-        }
-
-        /* 메뉴 섹션 */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            border-radius: 2px;
         }
 
         .menu-item {
-            background: white;
-            border-radius: 15px;
+            background: #FFFFFF;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 20px rgba(139, 69, 19, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f5e6d3;
         }
 
         .menu-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.15);
         }
 
         .menu-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(45deg, #f4e4c1, #e8d4a1);
+            background: linear-gradient(135deg, #fab1a0 0%, #ff7675 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -175,33 +80,34 @@
         }
 
         .menu-content {
-            padding: 1.5rem;
+            padding: 2rem;
         }
 
         .menu-title {
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 0.5rem;
-            color: #8B4513;
+            color: #2d3436;
         }
 
         .menu-description {
-            color: #666;
+            color: #636e72;
             margin-bottom: 1rem;
+            line-height: 1.6;
         }
 
         .menu-price {
             font-size: 1.3rem;
             font-weight: bold;
-            color: #FF6B35;
+            color: #d63031;
         }
 
-        /* 가맹점 정보 */
         .franchise-info {
-            background: linear-gradient(135deg, #f4e4c1 0%, #e8d4a1 100%);
+            background: linear-gradient(135deg, #f5e6d3 0%, #ffeaa7 100%);
             border-radius: 20px;
             padding: 3rem;
             margin: 3rem 0;
+            border: 1px solid #f5e6d3;
         }
 
         .info-grid {
@@ -226,20 +132,164 @@
         .info-number {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #8B4513;
+            color: #d63031;
             margin-bottom: 0.5rem;
         }
 
         .info-label {
-            color: #666;
+            color: #636e72;
             font-size: 1.1rem;
         }
 
-        /* 연락처 */
-        .contact {
-            background-color: #8B4513;
+        .highlight-section {
+            background: linear-gradient(135deg, #d63031 0%, #e17055 100%);
             color: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
             text-align: center;
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .highlight-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.4s;
+        }
+
+        .highlight-item:hover .highlight-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .highlight-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffeaa7;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .signature-menu {
+            background: linear-gradient(135deg, #f5e6d3 0%, #ffeaa7 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            border: 1px solid #f5e6d3;
+        }
+
+        .menu-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .signature-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(139, 69, 19, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f5e6d3;
+        }
+
+        .signature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+        }
+
+        .signature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .signature-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 0.5rem;
+        }
+
+        .sns-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .sns-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sns-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: #d63031;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 3px 15px rgba(139, 69, 19, 0.1);
+            transition: all 0.3s;
+            border: 1px solid #f5e6d3;
+        }
+
+        .sns-link:hover {
+            background: #d63031;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(214, 48, 49, 0.3);
+        }
+
+        .sns-icon {
+            font-size: 1.5rem;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #f5e6d3 0%, #ffeaa7 100%);
+            color: #2d3436;
+            text-align: center;
+            padding: 5rem 0;
+            border: 1px solid #f5e6d3;
         }
 
         .contact-info {
@@ -254,231 +304,477 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            padding: 1.5rem 2rem;
+            background: white;
+            border-radius: 15px;
+            border: 1px solid #f5e6d3;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: white;
+            box-shadow: 0 5px 20px rgba(139, 69, 19, 0.1);
+            transform: translateY(-2px);
         }
 
         .contact-icon {
             font-size: 1.5rem;
+            color: #d63031;
         }
 
-        /* 푸터 */
         footer {
-            background-color: #6B4423;
+            background: #2d3436;
             color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
         }
 
         /* 반응형 디자인 */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav li {
-                margin: 0.5rem 0;
-            }
-            
-            .contact-info {
-                flex-direction: column;
+            .highlight-grid {
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
+                max-width: 100%;
+            }
+
+            .highlight-item {
+                padding: 2rem 1.5rem;
+            }
+
+            .highlight-icon {
+                font-size: 2.5rem;
+            }
+
+            .highlight-title {
+                font-size: 1.3rem;
+            }
+
+            .highlight-description {
+                font-size: 1rem;
+            }
+
+            .menu-grid-4 {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+
+            .signature-item {
+                padding: 1.5rem 1rem;
+            }
+
+            .sns-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .sns-link {
+                width: 100%;
+                justify-content: center;
             }
         }
 
-        /* 애니메이션 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        @media (max-width: 480px) {
+            .highlight-section {
+                padding: 2rem 1rem;
+                margin: 2rem 0;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
+            .signature-menu {
+                padding: 2rem 1rem;
+                margin: 2rem 0;
+            }
+
+            .franchise-info {
+                padding: 2rem 1rem;
+                margin: 2rem 0;
+            }
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">🍜 전통분식</div>
-            <div class="tagline">시간이 만든 클래식한 맛</div>
-        </div>
-    </header>
+<body class="antialiased brand-bg">
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#home">홈</a></li>
-                <li><a href="#about">소개</a></li>
-                <li><a href="#menu">메뉴</a></li>
-                <li><a href="#franchise">가맹점</a></li>
-                <li><a href="#contact">문의</a></li>
-            </ul>
+    <!-- 네비게이션 -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-slate-200 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center text-white">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <span class="text-xl font-black tracking-tight text-slate-900">전통분식</span>
+            </div>
+            <div class="hidden md:flex gap-8 font-bold text-sm text-slate-600">
+                <a href="#identity" class="hover:text-red-600 transition-colors">Brand Identity</a>
+                <a href="#tech" class="hover:text-red-600 transition-colors">IT Tech Strategy</a>
+                <a href="#design" class="hover:text-red-600 transition-colors">Design Guidelines</a>
+                <a href="#signature" class="hover:text-red-600 transition-colors">Signature Menu</a>
+                <a href="#media" class="hover:text-red-600 transition-colors">Media & Press</a>
+                <a href="#contact" class="hover:text-red-600 transition-colors">Contact</a>
+            </div>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <h1 class="fade-in-up">유행을 타지 않는 클래식한 맛</h1>
-            <p class="fade-in-up">1960년대부터 이어져 온 전통 분식의 맛을 그대로</p>
-            <a href="#menu" class="btn-primary fade-in-up">메뉴 보기</a>
+    <!-- Brand Identity 섹션 -->
+    <section id="identity" class="pt-32 pb-20 px-6 bg-slate-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-sm font-bold text-red-600 uppercase tracking-widest mb-4">1. 슬로건 및 카피라이팅 고도화</p>
+            <h1 class="text-3xl font-bold mb-4">브랜드 아이덴티티 및 메시지 제안</h1>
+            <p class="text-slate-600 mb-12">새로운 브랜드의 핵심 메시지를 정의합니다.<br>유행에 민감한 F&B 시장에서 본질적인 '성장'과 '지속성'을 강조하며, 단순한 가맹을 넘어선 파트너십의 가치를 전달합니다.</p>
+            
+            <div class="bg-white rounded-3xl p-10 shadow-xl border border-slate-100 mb-16 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl -z-10 opacity-60"></div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[11px] font-bold mb-8 uppercase tracking-widest">
+                    <i class="fas fa-quote-left text-red-500 mr-1"></i> Main Slogan Candidates
+                </div>
+                <h2 id="slogan-display" class="text-3xl md:text-4xl font-black tracking-tight leading-snug fade-in h-36 flex flex-col items-center justify-center px-4 py-6" style="word-break: keep-all; color: #000000;">
+                    <span class="mb-3">남도분식</span>
+                    <span class="text-lg md:text-xl font-bold" style="color: #d63031;">남도 지방의 이름난 분식만 모으고 골랐습니다</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 text-left mb-6">
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fas fa-fire-flame-curved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Core Value : 지속 가능한 전문성</h3>
+                    <h4 class="text-lg font-bold text-red-600 mb-4 leading-tight">"멈추지 않는 레시피의 진화, 한계가 없는 미식의 스펙트럼"</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed" style="word-break: keep-all;">단순히 성실함에 기대지 않습니다. 데이터 기반의 지속적인 레시피 연구와 넓은 스펙트럼의 메뉴 구성으로 어떤 상권에서도 대응 가능한 경쟁력을 확보합니다.</p>
+                </div>
+                <div class="bg-slate-900 p-8 rounded-2xl text-white shadow-xl hover:-translate-y-1 transition-transform">
+                    <div class="w-12 h-12 bg-slate-800 text-red-400 rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Partnership : 동행과 시스템</h3>
+                    <h4 class="text-lg font-bold text-red-400 mb-4 leading-tight">"성공의 출발선이 다릅니다. 당신의 성장이 곧 우리의 지표입니다."</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed" style="word-break: keep-all;">단순한 가맹 관계를 넘어, 체계적인 시스템을 공유하며 점주님의 내일을 함께 설계하는 러닝메이트가 되겠습니다.</p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ironic Original</h3>
+                    <h4 class="text-lg font-bold text-red-600 mb-4 leading-tight">"어디에나 있지만 어디서도 볼 수 없는 남도분식만의 차별화된 메뉴 구성"</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed" style="word-break: keep-all;">흔한 메뉴 속에 숨겨진 남도분식만의 특별한 레시피. 익숙하지만 낯선, 기존에 없던 새로운 경험을 제공합니다.</p>
+                </div>
+                <div class="bg-slate-900 p-8 rounded-2xl text-white shadow-xl hover:-translate-y-1 transition-transform">
+                    <div class="w-12 h-12 bg-slate-800 text-red-400 rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Korean Heritage</h3>
+                    <h4 class="text-lg font-bold text-red-400 mb-4 leading-tight">"파란 기와, 자개장, 옛날 그릇.. 촌스럽지 않고 세련된 '진짜' 레트로 감성"</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed" style="word-break: keep-all;">한국의 전통 미학을 현대적으로 재해석. 고풍스러운 분위기 속에서 세련된 감성을 느낄 수 있는 남도분식만의 공간 디자인.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center text-xl mb-6">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Proven Success</h3>
+                    <h4 class="text-lg font-bold text-red-600 mb-4 leading-tight">"테이스티로드부터 맛있는 녀석들까지, 수많은 미디어가 먼저 찾아온 검증된 맛집"</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed" style="word-break: keep-all;">수많은 미디어와 인플루언서가 먼저 찾아온 검증된 맛. 이미 증명된 성공 공식을 당신의 비즈니스에 적용합니다.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">전통분식 이야기</h2>
-            <div class="franchise-info">
-                <p style="font-size: 1.2rem; line-height: 1.8; text-align: center; margin-bottom: 2rem;">
-                    전통분식은 1960년대 대한민국의 서민들을 위로했던 따뜻한 음식들을 그대로 지켜나가는 분식 프랜차이즈입니다.<br>
-                    빠르게 변하는 세상 속에서 변하지 않는 맛으로 여러분의 추억과 만납니다.
-                </p>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-number">1960년부터</div>
-                        <div class="info-label">60년 전통의 맛</div>
+    <!-- Signature Menu 섹션 -->
+    <section id="signature" class="py-24 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <p class="text-sm font-bold text-red-600 uppercase tracking-widest mb-4">Signature Menu</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">평범한 분식을 넘어선 남도분식만의 시그니처</h2>
+                <p class="text-slate-600">남도 지방의 전통 맛을 현대적으로 재해석한 특별한 메뉴들입니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-20 h-20 bg-red-50 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto">
+                        🥬
                     </div>
-                    <div class="info-item">
-                        <div class="info-number">150+</div>
-                        <div class="info-label">전국 가맹점</div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">상추튀김(김밥쌈)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">튀김과 김밥을 상추와 양파절임에 싸 먹는 광주/전주의 명물 분식</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-20 h-20 bg-red-50 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto">
+                        🌶️
                     </div>
-                    <div class="info-item">
-                        <div class="info-number">100만</div>
-                        <div class="info-label">고객 신뢰</div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">시래기 떡볶이</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">구수한 시래기와 매콤한 떡볶이의 만남 남도분식만의 웰빙 시그니처</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-20 h-20 bg-red-50 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto">
+                        🫘
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">빨콩 떡볶이</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">아삭한 콩나물과 매콤한 소스의 조화 중독성 강한 매운맛</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="w-20 h-20 bg-red-50 rounded-2xl flex items-center justify-center text-3xl mb-6 mx-auto">
+                        🍜
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">짜장 떡볶이</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">특제 춘장으로 맛을 낸 달콤 짭짤한 추억의 맛</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Strategy 섹션 -->
+    <section id="tech" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <p class="text-sm font-bold text-red-600 uppercase tracking-widest mb-4">2. Tech-Driven Strategy</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">IT 기술 도입 및 차별점 강조</h2>
+                <p class="text-slate-600" style="word-break: keep-all;">스마트 재고 관리 및 멀티 채널 마케팅 엔진의 도입 효과를 데이터를 통해 확인합니다. 첨단 IT 시스템이 어떻게 불필요한 비용을 줄이고 실제 영업 이익률을 극대화하는지 인터랙티브 대시보드를 통해 탐색해 보십시오.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="dark-glass p-8 md:p-10 rounded-3xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fas fa-boxes-stacked"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">스마트 재고 관리 시스템</h3>
+                            <p class="text-slate-400 text-sm">"감에 의존하는 관리는 끝났습니다."</p>
+                        </div>
+                    </div>
+                    <ul class="mb-8 space-y-3 text-slate-300 text-sm">
+                        <li><i class="fas fa-check text-red-500 mr-2"></i> 실시간 수요 예측을 통한 자동 발주 시스템</li>
+                        <li><i class="fas fa-check text-red-500 mr-2"></i> 재고 손실률(Loss Rate) 0%를 목표로 하는 AI 분석</li>
+                        <li><i class="fas fa-check text-red-500 mr-2"></i> 원가 절감을 통한 실질적 영업 이익률 극대화</li>
+                    </ul>
+                    <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700">
+                        <div class="chart-container">
+                            <canvas id="inventoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-8 md:p-10 rounded-3xl border border-slate-200">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900">멀티 채널 마케팅 엔진</h3>
+                            <p class="text-slate-500 text-sm">"디지털 파급력을 매장으로 연결"</p>
+                        </div>
+                    </div>
+                    <ul class="mb-8 space-y-3 text-slate-600 text-sm">
+                        <li><i class="fas fa-arrow-right text-red-500 mr-2"></i> AI 기반 타겟 광고 최적화로 불필요한 마케팅 비용 절감</li>
+                        <li><i class="fas fa-arrow-right text-red-500 mr-2"></i> 온/오프라인 통합 채널 관리로 고객 접점의 혁신적 확대</li>
+                    </ul>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                        <div class="chart-container">
+                            <canvas id="marketingChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="menu">
-        <div class="container">
-            <h2 class="section-title">클래식 메뉴</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="menu-image">🍜</div>
-                    <div class="menu-content">
-                        <div class="menu-title">순대국밥</div>
-                        <div class="menu-description">60년 전통의 깊은 맛! 신선한 순대와 쫄깃한 국물의 완벽한 조화</div>
-                        <div class="menu-price">8,000원</div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-image">🥟</div>
-                    <div class="menu-content">
-                        <div class="menu-title">왕만두</div>
-                        <div class="menu-description">두툼한 피에 든든한 속재료! 할머니의 손맛 그대로</div>
-                        <div class="menu-price">6,000원</div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-image">🍖</div>
-                    <div class="menu-content">
-                        <div class="menu-title">떡볶이</div>
-                        <div class="menu-description">매콤달콤한 전통 떡볶이! 쫄깃한 떡과 알맞은 양념</div>
-                        <div class="menu-price">5,000원</div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-image">🐟</div>
-                    <div class="menu-content">
-                        <div class="menu-title">오뎅탕</div>
-                        <div class="menu-description">따끈한 국물에 담백한 오뎅! 추운 겨울 최고의 간식</div>
-                        <div class="menu-price">4,000원</div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-image">🥞</div>
-                    <div class="menu-content">
-                        <div class="menu-title">부침개</div>
-                        <div class="menu-description">바삭한 겉과 촉촉한 속! 김치부침개와 해물부침개</div>
-                        <div class="menu-price">6,000원</div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="menu-image">🍙</div>
-                    <div class="menu-content">
-                        <div class="menu-title">김밥</div>
-                        <div class="menu-description">싱싱한 재료로 든든하게! 꼬마김밥과 참치김밥</div>
-                        <div class="menu-price">3,000원</div>
-                    </div>
-                </div>
+    <!-- Design Guidelines 섹션 -->
+    <section id="design" class="py-24 px-6 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <p class="text-sm font-bold text-red-400 uppercase tracking-widest mb-4">3. Visual Guidelines</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">웹 디자인 시각적 가이드라인</h2>
+                <p class="text-slate-400" style="word-break: keep-all;">제안된 'High-Tech Professionalism' 컨셉을 구현하기 위한 색상 및 타이포그래피 가이드입니다. 각 컬러 블록을 클릭하여 색상 코드를 확인하고 애플리케이션에 적용될 디자인 톤앤매너를 구상해 보세요.</p>
             </div>
-        </div>
-    </section>
 
-    <section id="franchise">
-        <div class="container">
-            <h2 class="section-title">가맹점 안내</h2>
-            <div class="franchise-info">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: #8B4513;">왜 전통분식인가?</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 3px 15px rgba(0,0,0,0.1);">
-                        <h4 style="color: #8B4513; margin-bottom: 1rem;">🏆 변치 않는 가치</h4>
-                        <p>유행을 타지 않는 클래식한 메뉴로 안정적인 고객층 확보</p>
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-4 bg-slate-800 p-8 rounded-3xl border border-slate-700">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <i class="fas fa-font text-red-400"></i> Typography & Concept
+                    </h3>
+                    <div class="mb-8">
+                        <h4 class="text-sm text-slate-400 mb-2 uppercase tracking-wider font-bold">Concept</h4>
+                        <div class="text-lg font-bold text-white bg-slate-700 inline-block px-4 py-2 rounded-lg">High-Tech Professionalism</div>
+                        <p class="text-sm text-slate-400 mt-2">신뢰감 있는 기술력 + 따뜻한 상생</p>
                     </div>
-                    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 3px 15px rgba(0,0,0,0.1);">
-                        <h4 style="color: #8B4513; margin-bottom: 1rem;">💰 합리적인 투자</h4>
-                        <p>최소화된 초기 투자비용과 빠른 회수 기간</p>
-                    </div>
-                    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 3px 15px rgba(0,0,0,0.1);">
-                        <h4 style="color: #8B4513; margin-bottom: 1rem;">🎓 완벽한 지원</h4>
-                        <p>메뉴 교육부터 운영 노하우까지 체계적인 지원 시스템</p>
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 3rem;">
-                    <a href="#contact" class="btn-primary">가맹 문의하기</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">문의하기</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
                     <div>
-                        <div style="font-weight: bold;">전화</div>
-                        <div>02-1234-5678</div>
+                        <h4 class="text-sm text-slate-400 mb-2 uppercase tracking-wider font-bold">Primary Font</h4>
+                        <div class="text-4xl font-bold mb-2 tracking-tight">Pretendard</div>
+                        <p class="text-sm text-slate-400 leading-relaxed">가독성이 높은 Sans-serif 계열을 사용하여 현대적이고 스마트한 인상 부여</p>
                     </div>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📧</div>
-                    <div>
-                        <div style="font-weight: bold;">이메일</div>
-                        <div>franchise@traditionbunsik.com</div>
+
+                <div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div onclick="showColorInfo('#d63031', 'Brand Red')" class="cursor-pointer group">
+                        <div class="h-32 bg-[#d63031] rounded-2xl mb-3 border border-slate-700 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
+                            <i class="fas fa-copy text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">Brand Red</h4>
+                        <p class="text-xs text-slate-400">전통 분식의 매콤함</p>
                     </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <div style="font-weight: bold;">주소</div>
-                        <div>서울시 종로구 전통로 123</div>
+                    <div onclick="showColorInfo('#fab1a0', 'Coral Orange')" class="cursor-pointer group">
+                        <div class="h-32 bg-[#fab1a0] rounded-2xl mb-3 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
+                            <i class="fas fa-copy text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">Coral Orange</h4>
+                        <p class="text-xs text-slate-400">따뜻한 음식의 온기</p>
+                    </div>
+                    <div onclick="showColorInfo('#f5e6d3', 'Cream Beige')" class="cursor-pointer group">
+                        <div class="h-32 bg-[#f5e6d3] rounded-2xl mb-3 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
+                            <i class="fas fa-copy text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">Cream Beige</h4>
+                        <p class="text-xs text-slate-400">아늑한 공간의 분위기</p>
+                    </div>
+                    <div onclick="showColorInfo('#faf8f5', 'Soft Ivory')" class="cursor-pointer group">
+                        <div class="h-32 bg-[#faf8f5] rounded-2xl mb-3 border border-slate-300 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
+                            <i class="fas fa-copy text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">Soft Ivory</h4>
+                        <p class="text-xs text-slate-400">깔끔한 전체 배경</p>
+                    </div>
+                    <div id="color-toast" class="col-span-full mt-4 p-4 bg-slate-800 rounded-xl text-center text-sm font-bold opacity-0 transition-opacity text-red-400 border border-red-900">
+                        클릭하여 색상을 확인하세요
                     </div>
                 </div>
             </div>
-            <div style="margin-top: 3rem;">
-                <p style="font-size: 1.1rem; margin-bottom: 1rem;">전통분식과 함께 할 성실한 파트너를 기다립니다.</p>
-                <a href="mailto:franchise@traditionbunsik.com" class="btn-primary">이메일 문의</a>
+            
+            <div class="mt-12 bg-slate-800 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between border border-slate-700">
+                <div class="flex items-center gap-4 mb-4 md:mb-0">
+                    <i class="fas fa-desktop text-3xl text-slate-400"></i>
+                    <div>
+                        <h4 class="font-bold text-lg">Visual Elements</h4>
+                        <p class="text-sm text-slate-400">대시보드 UI 형상화 및 고감도 R&D 이미지 조화</p>
+                    </div>
+                </div>
+                <button class="bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-500 transition-colors">
+                    상세 디자인 가이드 다운로드 <i class="fas fa-download ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media & Press 섹션 -->
+    <section id="media" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <p class="text-sm font-bold text-red-600 uppercase tracking-widest mb-4">Media & Press</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">방송이 인정한 맛집</h2>
+                <p class="text-slate-600">유튜브 영상을 클릭해서 확인하세요.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold">
+                            TV
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Comedy TV</h3>
+                            <p class="text-sm text-slate-600">맛있는 녀석들</p>
+                        </div>
+                    </div>
+                    <h4 class="text-md font-bold text-red-600 mb-3">"남도한정식 못지않은 푸짐함!" 뚱4가 반한 떡볶이 먹방 파티</h4>
+                    <a href="https://www.youtube.com/results?search_query=맛있는녀석들+남도분식" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-colors">
+                        영상 보러가기 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold">
+                            TV
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">O'live</h3>
+                            <p class="text-sm text-slate-600">테이스티로드</p>
+                        </div>
+                    </div>
+                    <h4 class="text-md font-bold text-red-600 mb-3">"상추를 튀긴 게 아니다?" 전라도 음식을 서촌에서 즐기자 EP.18</h4>
+                    <a href="https://www.youtube.com/watch?v=w8d1JGSN_tw" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-colors">
+                        영상 보러가기 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold">
+                            TV
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">YouTube</h3>
+                            <p class="text-sm text-slate-600">밉지않은 관종언니</p>
+                        </div>
+                    </div>
+                    <h4 class="text-md font-bold text-red-600 mb-3">이지혜 부부의 서촌 먹방 데이트 남도분식 메뉴 전격 해부!</h4>
+                    <a href="https://www.youtube.com/results?search_query=관종언니+남도분식" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-colors">
+                        영상 보러가기 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:shadow-lg transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-red-600 text-white rounded-xl flex items-center justify-center font-bold">
+                            TV
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">KBS</h3>
+                            <p class="text-sm text-slate-600">생생정보통</p>
+                        </div>
+                    </div>
+                    <h4 class="text-md font-bold text-red-600 mb-3">줄 서서 먹는 이색 분식 맛집 상추튀김의 비밀</h4>
+                    <a href="https://www.youtube.com/results?search_query=생생정보통+남도분식" target="_blank" class="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-700 transition-colors">
+                        영상 보러가기 <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact 섹션 -->
+    <section id="contact" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <p class="text-sm font-bold text-red-600 uppercase tracking-widest mb-4">4. Get In Touch</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">문의하기</h2>
+                <p class="text-slate-600">전통분식과 함께할 준비가 되셨나요? 아래 연락처로 문의하시면 상세한 가맹 정보와 성공적인 창업을 위한 지원을 안내해 드립니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">전화 문의</h3>
+                    <p class="text-slate-600 mb-4">바로 연락드릴까요?</p>
+                    <p class="text-lg font-bold text-red-600">02-1234-5678</p>
+                </div>
+
+                <div class="bg-slate-900 p-8 rounded-3xl text-white text-center hover:-translate-y-2 transition-transform">
+                    <div class="w-16 h-16 bg-slate-800 text-red-400 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">이메일 문의</h3>
+                    <p class="text-slate-400 mb-4">상세 정보를 보내드릴게요</p>
+                    <p class="text-lg font-bold text-red-400">info@jeontongbunsik.com</p>
+                </div>
+
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 text-center hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-slate-900">본사 위치</h3>
+                    <p class="text-slate-600 mb-4">직접 방문해주세요</p>
+                    <p class="text-lg font-bold text-red-600">서울시 강남구 테헤란로 123</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <div class="bg-gradient-to-r from-red-600 to-orange-500 p-8 rounded-3xl text-white">
+                    <h3 class="text-2xl font-bold mb-4">지금 바로 시작하세요</h3>
+                    <p class="text-lg mb-6 opacity-90">60년 전통의 성공 공식을 당신의 비즈니스에 적용할 기회</p>
+                    <button class="bg-white text-red-600 px-8 py-4 rounded-full font-bold hover:bg-slate-100 transition-colors text-lg shadow-xl">
+                        가맹 상담 신청하기 <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -491,56 +787,178 @@
     </footer>
 
     <script>
-        // 부드러운 스크롤
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        const slogans = [
+            "\"트렌드를 쫓지 않습니다.<br>우리는 오직 당신의 가능성을 확장할 뿐입니다.\"",
+            "\"유행은 머물다 가지만,<br>견고한 확장은 시대를 관통합니다.\"",
+            "\"반짝이는 유행보다 깊이 있는 확장,<br>흔들리지 않는 성공의 궤도를 만듭니다.\""
+        ];
+
+        function changeSlogan(index) {
+            const display = document.getElementById('slogan-display');
+            const btns = document.querySelectorAll('.slogan-btn');
+            
+            display.classList.remove('fade-in');
+            void display.offsetWidth; 
+            
+            display.innerHTML = slogans[index];
+            display.classList.add('fade-in');
+
+            btns.forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+                    btn.classList.add('bg-red-600', 'text-white', 'border-red-600', 'shadow-lg', 'shadow-red-600/20');
+                } else {
+                    btn.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+                    btn.classList.remove('bg-red-600', 'text-white', 'border-red-600', 'shadow-lg', 'shadow-red-600/20');
                 }
             });
-        });
+        }
 
-        // 스크롤 애니메이션
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        function showColorInfo(hex, name) {
+            const toast = document.getElementById('color-toast');
+            toast.innerHTML = `<span class="text-white">${name}</span> : ${hex} (Copied to clipboard)`;
+            toast.style.opacity = 1;
+            navigator.clipboard.writeText(hex);
+            setTimeout(() => { toast.style.opacity = 0; }, 3000);
+        }
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart.js 기본 설정
+            Chart.defaults.color = '#94A3B8';
+            Chart.defaults.font.family = "'Pretendard', sans-serif";
+
+            // 재고 관리 차트
+            const ctxInventory = document.getElementById('inventoryChart').getContext('2d');
+            new Chart(ctxInventory, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
+                    datasets: [
+                        {
+                            label: '재고 손실률 (Loss Rate %)',
+                            data: [15, 12, 8, 4, 1.5, 0.5],
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '영업 이익률 (Profit Margin %)',
+                            data: [10, 12, 16, 21, 25, 28],
+                            borderColor: '#d63031',
+                            backgroundColor: 'rgba(214, 48, 49, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#cbd5e1' } },
+                        tooltip: { backgroundColor: 'rgba(45, 52, 54, 0.9)', titleColor: '#fff', bodyColor: '#fff', padding: 12 }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(51, 65, 85, 0.5)' } },
+                        y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Loss %', color: '#ef4444' }, grid: { color: 'rgba(51, 65, 85, 0.5)' } },
+                        y1: { type: 'linear', display: true, position: 'right', title: { display: true, text: 'Profit %', color: '#d63031' }, grid: { drawOnChartArea: false } }
+                    }
                 }
             });
-        }, observerOptions);
 
-        // 메뉴 아이템 애니메이션
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(30px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(item);
-        });
+            // 마케팅 차트
+            const ctxMarketing = document.getElementById('marketingChart').getContext('2d');
+            new Chart(ctxMarketing, {
+                type: 'bar',
+                data: {
+                    labels: ['기존 마케팅 방식', 'AI 타겟 마케팅 도입 후'],
+                    datasets: [
+                        {
+                            label: '불필요한 마케팅 비용',
+                            data: [100, 35],
+                            backgroundColor: '#94A3B8',
+                            borderRadius: 8
+                        },
+                        {
+                            label: '유효 고객 접점 (Reach)',
+                            data: [40, 120],
+                            backgroundColor: '#d63031',
+                            borderRadius: 8
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: '#475569' } },
+                        tooltip: { backgroundColor: 'rgba(45, 52, 54, 0.9)', titleColor: '#fff', bodyColor: '#fff', padding: 12 }
+                    },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { grid: { color: 'rgba(226, 232, 240, 0.5)' } }
+                    }
+                }
+            });
 
-        // 네비게이션 스크롤 효과
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            const nav = document.querySelector('nav');
+            // 스크롤 애니메이션
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // 애니메이션을 적용할 요소들
+            const animatedElements = document.querySelectorAll('.menu-item, .info-item, .highlight-item, .signature-item');
             
-            if (currentScroll > 100) {
-                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
-            } else {
-                nav.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-            }
-            
-            lastScroll = currentScroll;
+            animatedElements.forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+
+            // 메뉴 아이템 호버 효과
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // 부드러운 스크롤
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const navHeight = document.querySelector('nav').offsetHeight;
+                        const targetPosition = target.offsetTop - navHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
