@@ -404,9 +404,8 @@
             </div>
             <div class="hidden md:flex gap-8 font-bold text-sm text-slate-600">
                 <a href="#identity" class="hover:text-red-600 transition-colors">Brand Identity</a>
-                <a href="#tech" class="hover:text-red-600 transition-colors">IT Tech Strategy</a>
-                <a href="#design" class="hover:text-red-600 transition-colors">Design Guidelines</a>
                 <a href="#signature" class="hover:text-red-600 transition-colors">Signature Menu</a>
+                <a href="#tech" class="hover:text-red-600 transition-colors">IT Tech Strategy</a>
                 <a href="#media" class="hover:text-red-600 transition-colors">Media & Press</a>
                 <a href="#contact" class="hover:text-red-600 transition-colors">Contact</a>
             </div>
@@ -572,82 +571,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Design Guidelines 섹션 -->
-    <section id="design" class="py-24 px-6 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 max-w-3xl mx-auto">
-                <p class="text-sm font-bold text-red-400 uppercase tracking-widest mb-4">3. Visual Guidelines</p>
-                <h2 class="text-3xl md:text-4xl font-bold mb-6">웹 디자인 시각적 가이드라인</h2>
-                <p class="text-slate-400" style="word-break: keep-all;">제안된 'High-Tech Professionalism' 컨셉을 구현하기 위한 색상 및 타이포그래피 가이드입니다. 각 컬러 블록을 클릭하여 색상 코드를 확인하고 애플리케이션에 적용될 디자인 톤앤매너를 구상해 보세요.</p>
-            </div>
-
-            <div class="grid md:grid-cols-12 gap-8 items-start">
-                <div class="md:col-span-4 bg-slate-800 p-8 rounded-3xl border border-slate-700">
-                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-font text-red-400"></i> Typography & Concept
-                    </h3>
-                    <div class="mb-8">
-                        <h4 class="text-sm text-slate-400 mb-2 uppercase tracking-wider font-bold">Concept</h4>
-                        <div class="text-lg font-bold text-white bg-slate-700 inline-block px-4 py-2 rounded-lg">High-Tech Professionalism</div>
-                        <p class="text-sm text-slate-400 mt-2">신뢰감 있는 기술력 + 따뜻한 상생</p>
-                    </div>
-                    <div>
-                        <h4 class="text-sm text-slate-400 mb-2 uppercase tracking-wider font-bold">Primary Font</h4>
-                        <div class="text-4xl font-bold mb-2 tracking-tight">Pretendard</div>
-                        <p class="text-sm text-slate-400 leading-relaxed">가독성이 높은 Sans-serif 계열을 사용하여 현대적이고 스마트한 인상 부여</p>
-                    </div>
-                </div>
-
-                <div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div onclick="showColorInfo('#d63031', 'Brand Red')" class="cursor-pointer group">
-                        <div class="h-32 bg-[#d63031] rounded-2xl mb-3 border border-slate-700 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
-                            <i class="fas fa-copy text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">Brand Red</h4>
-                        <p class="text-xs text-slate-400">전통 분식의 매콤함</p>
-                    </div>
-                    <div onclick="showColorInfo('#fab1a0', 'Coral Orange')" class="cursor-pointer group">
-                        <div class="h-32 bg-[#fab1a0] rounded-2xl mb-3 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
-                            <i class="fas fa-copy text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">Coral Orange</h4>
-                        <p class="text-xs text-slate-400">따뜻한 음식의 온기</p>
-                    </div>
-                    <div onclick="showColorInfo('#f5e6d3', 'Cream Beige')" class="cursor-pointer group">
-                        <div class="h-32 bg-[#f5e6d3] rounded-2xl mb-3 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
-                            <i class="fas fa-copy text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">Cream Beige</h4>
-                        <p class="text-xs text-slate-400">아늑한 공간의 분위기</p>
-                    </div>
-                    <div onclick="showColorInfo('#faf8f5', 'Soft Ivory')" class="cursor-pointer group">
-                        <div class="h-32 bg-[#faf8f5] rounded-2xl mb-3 border border-slate-300 shadow-lg group-hover:-translate-y-2 transition-transform flex items-end p-4">
-                            <i class="fas fa-copy text-slate-900 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </div>
-                        <h4 class="font-bold text-sm">Soft Ivory</h4>
-                        <p class="text-xs text-slate-400">깔끔한 전체 배경</p>
-                    </div>
-                    <div id="color-toast" class="col-span-full mt-4 p-4 bg-slate-800 rounded-xl text-center text-sm font-bold opacity-0 transition-opacity text-red-400 border border-red-900">
-                        클릭하여 색상을 확인하세요
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 bg-slate-800 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between border border-slate-700">
-                <div class="flex items-center gap-4 mb-4 md:mb-0">
-                    <i class="fas fa-desktop text-3xl text-slate-400"></i>
-                    <div>
-                        <h4 class="font-bold text-lg">Visual Elements</h4>
-                        <p class="text-sm text-slate-400">대시보드 UI 형상화 및 고감도 R&D 이미지 조화</p>
-                    </div>
-                </div>
-                <button class="bg-red-600 text-white px-6 py-3 rounded-full font-bold hover:bg-red-500 transition-colors">
-                    상세 디자인 가이드 다운로드 <i class="fas fa-download ml-2"></i>
-                </button>
             </div>
         </div>
     </section>
